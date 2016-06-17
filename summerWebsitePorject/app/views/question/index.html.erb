@@ -1,0 +1,36 @@
+<div>
+	<%= link_to 'New Question', "questions/new", class: 'btn btn-default' %>
+</div>
+
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Question</th>
+				<th>Answer</th>
+				<th>Distractor Style</th>
+				<th>Distractor 1</th>
+				<th>Distractor 2</th>
+				<th>Distractor 3</th>
+				<th>Tag</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @questions.each do |i| %>
+				<tr>
+					<td><%=i.id%></td>
+					<td><%= link_to i.question_text, question_path(Question.find(i.id)) << i.id %> </td>
+					<td><%=i.answer%></td>
+					<td><%=i.distractors%></td>
+					<td><%=i.dist1%></td>
+					<td><%=i.dist2%></td>
+					<td><%=i.dist3%></td>
+					<td><%= i.tag%></td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+</div>
+

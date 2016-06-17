@@ -53,6 +53,9 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get '/questions/index' => 'question#index'
-  post '/questions/new' => 'question#create'
+
+  get '/questions' => 'question#index', :as => :question_index
+  get '/questions/new' => 'question#new'
+  post '/questions' => 'question#create'
+  get '/questions/:id' => 'question#show', :as => :question
 end

@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Question</th>
+						<th>Answer</th>
+						<th>Tag</th>
+						<th>Distractor Format</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= @question.id %></td>
+						<td><%= @question.question_text %></td>
+						<td><%= @question.answer %></td>
+						<td><%= @question.tag %></td>
+						<td><%= @question.distractors %></td>
+					</tr>
+			</table>
+		</div>
+	</div>
+	<% if @question.distractors == "explicit" %>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Distractor 1</th>
+						<th>Distractor 2</th>
+						<th>Distractor 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= @question.dist1 %></td>
+						<td><%= @question.dist2 %></td>
+						<td><%= @question.dist3 %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+	<div class="row">
+		<%= link_to 'Back', question_index_path, class: 'btn btn-default' %>
+	</div>
+	<div class="row">
+		<div class="col-sm-10">
+			Created at: <%= @question.created_at %>
+		</div>
+		<div class="col-sm-10">
+			Updated at: <%= @question.updated_at %>
+		</div>
+	</div>
+</div>

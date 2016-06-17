@@ -1,4 +1,4 @@
 class Question < ActiveRecord::Base
-	belongs_to :qsets
+	belongs_to :qset
 	
 end
