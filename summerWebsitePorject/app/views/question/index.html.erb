@@ -15,19 +15,21 @@
 				<th>Distractor 2</th>
 				<th>Distractor 3</th>
 				<th>Tag</th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @questions.each do |i| %>
 				<tr>
 					<td><%=i.id%></td>
-					<td><%= link_to i.question_text, question_path(Question.find(i.id)) << i.id %> </td>
+					<td><%= link_to i.question_text, question_path(Question.find(i.id))%> </td>
 					<td><%=i.answer%></td>
 					<td><%=i.distractors%></td>
 					<td><%=i.dist1%></td>
 					<td><%=i.dist2%></td>
 					<td><%=i.dist3%></td>
 					<td><%= i.tag%></td>
+					<td><%= link_to "Edit", edit_question_path(Question.find(i.id)) %></td>
 				</tr>
 			<%end%>
 		</tbody>

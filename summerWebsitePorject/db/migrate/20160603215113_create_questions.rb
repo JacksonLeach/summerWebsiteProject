@@ -12,6 +12,11 @@ class CreateQuestions < ActiveRecord::Migration
 
 	      	t.timestamps null: false
 	   	end
-	   	execute "create sequence questions_question_id"
+	   	create_table :question_result_data do |t|
+	   		t.bigint :attempts
+	   		t.bigint :success
+	   		t.bigint :failures
+	   		t.doubleprecision :average
+	   	end
 	end
 end
