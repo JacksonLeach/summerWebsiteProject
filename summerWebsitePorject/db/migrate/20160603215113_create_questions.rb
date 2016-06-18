@@ -16,7 +16,7 @@ class CreateQuestions < ActiveRecord::Migration
 	   		t.bigint :attempts
 	   		t.bigint :success
 	   		t.bigint :failures
-	   		t.doubleprecision :average
+	   		t.decimal :average
 	   	end
 	end
 end

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>  
+    <%= stylesheet_link_tag :application, media: 'all', 'data-turbolinks-track' => true %>  
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 
     <%= csrf_meta_tags %>
     <title>Summer Website Project</title>
@@ -84,6 +84,12 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
+          <div id="flash_messages">
+            <% flash.each do |key, value| %>
+              <%= content_tag(:div, value, :class => "flash #{key}") %>
+            <% end %>
+          </div>
+          
           <%= yield %>
       </div>
     </div>

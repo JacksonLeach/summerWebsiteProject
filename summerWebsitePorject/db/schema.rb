@@ -17,8 +17,16 @@ ActiveRecord::Schema.define(version: 20160603215139) do
   enable_extension "plpgsql"
 
   create_table "qsets", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_result_data", force: :cascade do |t|
+    t.integer "attempts", limit: 8
+    t.integer "success",  limit: 8
+    t.integer "failures", limit: 8
+    t.decimal "average"
   end
 
   create_table "questions", force: :cascade do |t|

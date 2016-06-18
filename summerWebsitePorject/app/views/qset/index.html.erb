@@ -1,0 +1,18 @@
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Set Name</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @qsets.each do |i| %>
+			<tr> 
+				<td><%= i.id %></td>
+				<td><%= i.name %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>

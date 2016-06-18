@@ -53,12 +53,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
   get '/questions' => 'question#index', :as => :question_index
   get '/questions/new' => 'question#new'
   post '/questions' => 'question#create'
   get '/questions/:id' => 'question#show', :as => :question
   get '/questions/:id/edit' => 'question#edit', as: :edit_question
   patch '/questions/:id' => 'question#update'
-  get '/questionsets' => 'qset#index', :as =>:qset_index
+  get '/questionsets' => 'qset#index', :as => :qset_index
+  get '/questionsets/new' => 'qset#new', :as => :qset_new
+  post '/questionsets' => 'qset#create', :as => :qset_create
 end

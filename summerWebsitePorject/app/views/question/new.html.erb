@@ -1,58 +1,63 @@
-<div class="containter">
-	<div class="row">
-		<%= form_for(@question, html: { class:  "form-inline"}) do |f| %>
-			<div class="field form-group">
-				<%= f.label :question_text, class: 'col-sm-4 control-label', id: 'form-new' %>
-				<div class = "col-sm-8" id="form-new">
-					<%= f.text_field :question_text, class: 'form-control', id: 'form-new' %>
+
+<%= form_for(@question, html: { class:  "form-inline"}) do |f| %>
+	<div class="containter">
+		<div class="row">
+			
+				<div class="field form-group">
+					<%= f.label :question_text, class: 'col-sm-4 control-label', id: 'form-new' %>
+					<div class = "col-sm-8" id="form-new">
+						<%= f.text_field :question_text, class: 'form-control', id: 'form-new' %>
+					</div>
+					<%= f.label :answer, class: 'col-sm-4 control-label', id: 'form-new' %>
+					<div class="col-sm-8">
+						<%= f.text_field :answer, class: 'form-control', id: 'form-new' %>
+					</div>
 				</div>
-				<%= f.label :answer, class: 'col-sm-4 control-label', id: 'form-new' %>
-				<div class="col-sm-8">
-					<%= f.text_field :answer, class: 'form-control', id: 'form-new' %>
-				</div>
-			</div>
-			<div class="field form-group">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-11">
-							<%= f.radio_button :distractors, "explicit", id: 'form-new'%>
-							<%=f.label :distractors,"Explicit", class: 'form-control', id: 'form-new' %>
+				<div class="field form-group">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-11">
+								<%= f.radio_button :distractors, "explicit", id: 'form-new'%>
+								<%=f.label :distractors,"Explicit", class: 'form-control', id: 'form-new' %>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-11">
+								<%= f.radio_button :distractors, "implicit", id: 'form-new'%>
+								<%=f.label :distractors, "Implicit", class: 'form-control', id: 'form-new' %>
+							</div> 
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-11">
-							<%= f.radio_button :distractors, "implicit", id: 'form-new'%>
-							<%=f.label :distractors, "Implicit", class: 'form-control', id: 'form-new' %>
-						</div> 
+				</div>
+		</div>
+		<div class="row">
+				<div class="field form-group">
+					<%= f.label :dist1, class: 'col-sm-1 control-label', id: 'form-new' %>
+					<div class="col-sm-5">
+						<%= f.text_field :dist1, class: 'form-control', id: 'form-new' %>
+					</div>
+					<%= f.label :dist2, class: 'col-sm-1 control-label', id: 'form-new' %>
+					<div class="col-sm-5">
+						<%= f.text_field :dist2, class: 'form-control', id: 'form-new' %>
+					</div>
+					<%= f.label :dist3, class: 'col-sm-1 control-label', id: 'form-new' %>
+					<div class="col-sm-5">
+						<%= f.text_field :dist3, class: 'form-control', id: 'form-new' %>
+					</div>
+					<%= f.label :tag, class: 'col-sm-1 control-label', id: 'form-new' %>
+					<div class="col-sm-5">
+						<%= f.text_field :tag, class: 'form-control', id: 'form-new' %>
 					</div>
 				</div>
-			</div>
-	</div>
-	<div class="row">
-			<div class="field form-group">
-				<%= f.label :dist1, class: 'col-sm-1 control-label', id: 'form-new' %>
-				<div class="col-sm-5">
-					<%= f.text_field :dist1, class: 'form-control', id: 'form-new' %>
-				</div>
-				<%= f.label :dist2, class: 'col-sm-1 control-label', id: 'form-new' %>
-				<div class="col-sm-5">
-					<%= f.text_field :dist2, class: 'form-control', id: 'form-new' %>
-				</div>
-				<%= f.label :dist3, class: 'col-sm-1 control-label', id: 'form-new' %>
-				<div class="col-sm-5">
-					<%= f.text_field :dist3, class: 'form-control', id: 'form-new' %>
-				</div>
-				<%= f.label :tag, class: 'col-sm-1 control-label', id: 'form-new' %>
-				<div class="col-sm-5">
-					<%= f.text_field :tag, class: 'form-control', id: 'form-new' %>
-				</div>
-			</div>
+				
+		</div>
+		<div class="row">
 			<div class="actions form-group">
 				<div class="col-sm-10" id="form-new">
 					<%= f.submit %>
 				</div>
 			</div>
+		</div>
+			
 	</div>
-		<% end %>
-	</div>
-</div>
+<% end %>

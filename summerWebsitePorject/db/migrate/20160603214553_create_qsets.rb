@@ -5,7 +5,7 @@ class CreateQsets < ActiveRecord::Migration
       		t.timestamps null: false
       	end
       	create_table :questions do |t|
-      		t.belongs_to :qsets, index: true
+      		t.belongs_to :qset, index: true
       	end
   	end
 end
