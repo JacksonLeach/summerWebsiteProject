@@ -19,6 +19,22 @@ class QsetController < ApplicationController
 	def return_question(id)
 		@this_question = Question.find(id)
 	end
+	def show
+		@qset = Qset.find(params[:id])
+		@questions = @qset.questions
+	end
+	def edit
+		@qset = Qset.find(params[:id])
+		@question_list = @qset.questions
+	end
+	def update
+		@qset = Qset.find(params[:id])
+		if @qset.update_attributes(qset_params)
+			redirect_to :action => 'show', :id => @qset.id
+		else
+			render 'edit'
+		end
+	end
 	private
 
 	def qset_params

@@ -62,4 +62,7 @@ Rails.application.routes.draw do
   get '/questionsets' => 'qset#index', :as => :qset_index
   get '/questionsets/new' => 'qset#new', :as => :qset_new
   post '/questionsets' => 'qset#create', :as => :qset_create
+  get '/questionsets/:id' => 'qset#show', :as => :qset
+  get '/questionsets/:id/edit' => 'qset#edit', :as =>:qset_edit
+  patch '/questionsets/:id' => 'qset#update'
 end

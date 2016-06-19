@@ -1,4 +1,4 @@
-<%= form_for(@qset, :url => '/questionsets',  html: {class: "form-inline"}) do |f| %>
+<%= form_for(@qset,  html: {class: "form-inline", method: 'patch'}) do |f| %>
 	<div class="container">
 		<div class="row">
 			
@@ -37,5 +37,6 @@
 		<div class="row">
 			<%= f.submit %>
 		</div>
-		<% end %>
+		
 	</div>
+<% end %>

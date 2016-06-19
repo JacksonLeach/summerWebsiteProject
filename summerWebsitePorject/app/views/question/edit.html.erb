@@ -1,6 +1,7 @@
+<%= form_for(@question, html: { class:  "form-inline"}) do |f| %>
 <div class="containter">
 	<div class="row">
-		<%= form_for(@question, html: { class:  "form-inline"}) do |f| %>
+		
 			<div class="field form-group">
 				<%= f.label :question_text, class: 'col-sm-4 control-label', id: 'form-new' %>
 				<div class = "col-sm-8" id="form-new">
@@ -53,6 +54,7 @@
 				</div>
 			</div>
 	</div>
-		<% end %>
+		
 	</div>
 </div>
+<% end %>
