@@ -1,37 +1,41 @@
-<div class="container">
-	<div class="row">
-		<%= form_for(:qset, :url => '/questionsets',  html: {class: "form-inline"}) do |f| %>
-			<div class="field form-group">
-				<%= f.label :name, class: "col-sm-3 control-label" %>
-				<%= f.text_field :name, class: "col-sm-7 form-control" %>
-			</div>
-		 <%= f.submit %>
-	</div>
-	<% end %>
-	<div class="row">
-	<div id="scrollable">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Question</th>
-					<th>Answer</th>
-					<th>Distractor Style</th>
-				</tr>
-			</thead>
+<%= form_for(:qset, :url => '/questionsets',  html: {class: "form-inline"}) do |f| %>
+	<div class="container">
+		<div class="row">
 			
-				<tbody>
-					<% @question_list.each do |q| %>
-						<tr>
-							<td><%= q.id %></td>
-							<td><%= q.question_text %></td>
-							<td><%= q.answer %></td>
-							<td><%= q.distractors %></td>
-						</tr>
-					<% end %>
-				</tbody>
-			
-		</table>
+				<div class="field form-group">
+					<%= f.label :name, class: "col-sm-3 control-label" %>
+					<%= f.text_field :name, class: "col-sm-7 form-control" %>
+				</div>
 		</div>
+		<div class="row">
+		<div id="scrollable">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Question</th>
+						<th>Answer</th>
+						<th>Distractor Style</th>
+						<th>Add in set?</th>
+					</tr>
+				</thead>
+					<tbody>
+						<%= f.collection_check_boxes :question_ids, @question_list, :id, :question_text  do |b|%>
+							<tr>
+								<td><%= b.value %></td>
+								<td><%= return_question(b.value).question_text %></td>
+								<td><%= return_question(b.value).answer %></td>
+								<td><%= return_question(b.value).distractors %></td>
+								<td><%= b.check_box %> </td>
+							</tr>
+						<% end %>
+					</tbody>
+				
+			</table>
+			</div>
+		</div>
+		<div class="row">
+			<%= f.submit %>
+		</div>
+		<% end %>
 	</div>
-</div>

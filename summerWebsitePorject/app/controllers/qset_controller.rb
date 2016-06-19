@@ -1,4 +1,5 @@
 class QsetController < ApplicationController
+	helper_method :return_question
 	def index
 		@qsets = Qset.all
 	end
@@ -15,9 +16,12 @@ class QsetController < ApplicationController
 		@qset = Qset.new
 		@question_list = Question.all
 	end
+	def return_question(id)
+		@this_question = Question.find(id)
+	end
 	private
 
 	def qset_params
-		params.require(:qset).permit(:name)
+		params.require(:qset).permit(:name, :question_ids => [])
 	end
 end
