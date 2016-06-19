@@ -31,6 +31,7 @@ class QsetController < ApplicationController
 		@qset = Qset.find(params[:id])
 		if @qset.update_attributes(qset_params)
 			redirect_to :action => 'show', :id => @qset.id
+			flash[:notice] = "Set successfully updated!"
 		else
 			render 'edit'
 		end

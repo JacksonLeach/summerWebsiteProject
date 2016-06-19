@@ -35,7 +35,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<%= f.submit %>
+			<div class="col-sm-2">
+				<%= f.submit "Create Set", class: "btn btn-default btn-form-submit"%>
+			</div>
+			<div class="col-sm-2">
+				<%= link_to "Back", qset_index_path, class: "btn btn-default btn-form-back" %>
+			</div> 
 		</div>
 		<% end %>
 	</div>

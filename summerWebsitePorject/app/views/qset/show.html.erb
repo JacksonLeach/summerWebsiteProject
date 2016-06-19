@@ -40,4 +40,15 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<%= link_to "Back", qset_index_path, class: "btn btn-default" %>
+	</div>
+	<div class="row">
+		<div class="col-sm-10">
+			Created at: <%= @qset.created_at %>
+		</div>
+		<div class="col-sm-10">
+			Updated at: <%= @qset.updated_at %>
+		</div>
+	</div>
 </div>
