@@ -53,12 +53,25 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
   get '/questions' => 'question#index', :as => :question_index
   get '/questions/new' => 'question#new'
   post '/questions' => 'question#create'
   get '/questions/:id' => 'question#show', :as => :question
   get '/questions/:id/edit' => 'question#edit', as: :edit_question
   patch '/questions/:id' => 'question#update'
-  get '/questionsets' => 'qset#index', :as =>:qset_index
+  get '/questionsets' => 'qset#index', :as => :qset_index
+  get '/questionsets/new' => 'qset#new', :as => :qset_new
+  post '/questionsets' => 'qset#create', :as => :qset_create
+  get '/questionsets/:id' => 'qset#show', :as => :qset
+  get '/questionsets/:id/edit' => 'qset#edit', :as =>:qset_edit
+  patch '/questionsets/:id' => 'qset#update'
+  get '/signup/:role' => 'user#new', :as => :user_new
+  post '/signup/:role' => 'user#create', :as => :user_create
+  get '/user/:id' => 'user#show', :as => :user_show
+  root 'question#index'
+  get '/login' => 'session#new', as: :login
+  post '/login' => 'session#create'
+  delete '/logout' => 'session#destroy', as: :logout
+  get '/taketest/:qset_id' => 'set_result#new', as: :take_test
+  post '/taketest/:qset_id' => 'set_result#calculate_results', as: :qset_results_create
 end

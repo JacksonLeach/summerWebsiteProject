@@ -11,14 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160603215139) do
+ActiveRecord::Schema.define(version: 20160703221022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "qsets", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "qsets_questions", id: false, force: :cascade do |t|
+    t.integer "qset_id",     null: false
+    t.integer "question_id", null: false
+  end
+
+  add_index "qsets_questions", ["qset_id", "question_id"], name: "index_qsets_questions_on_qset_id_and_question_id", using: :btree
+  add_index "qsets_questions", ["question_id", "qset_id"], name: "index_qsets_questions_on_question_id_and_qset_id", using: :btree
+
+  create_table "question_result_data", force: :cascade do |t|
+    t.integer "attempts", limit: 8
+    t.integer "success",  limit: 8
+    t.integer "failures", limit: 8
+    t.decimal "average"
+  end
+
+  create_table "question_results", force: :cascade do |t|
+    t.string   "question"
+    t.string   "correct_answer"
+    t.string   "user_answer"
+    t.boolean  "correct?"
+    t.string   "tag"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -33,14 +60,25 @@ ActiveRecord::Schema.define(version: 20160603215139) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "students", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "set_results", force: :cascade do |t|
+    t.string   "number_of_questions"
+    t.string   "questions_correct"
+    t.decimal  "score"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+    t.integer  "qset_id"
   end
 
-  create_table "teachers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "password_digest"
+    t.string   "role"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

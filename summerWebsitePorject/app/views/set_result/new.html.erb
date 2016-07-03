@@ -1,0 +1,34 @@
+<%= form_tag url: qset_results_create_path() do |f|%>
+	<% @question_list.each do |question| %>
+	<div class="row">
+		<%= question.question_text %>
+	</div>
+	<div class = "row">
+		<div class="col-xs-offset-1">
+			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.answer %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']", question.answer %>
+		</div>
+	</div>
+	<div class = "row">
+		<div class="col-xs-offset-1">
+			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist1 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist1 %>
+		</div>
+	</div>
+	<div class = "row">
+		<div class="col-xs-offset-1">
+			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist2 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist2 %>
+		</div>
+	</div>
+	<div class = "row">
+		<div class="col-xs-offset-1">
+			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist3 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist3 %>
+		</div>
+	</div>
+	<% end %>
+
+<%= submit_tag %>
+<% end %>
+

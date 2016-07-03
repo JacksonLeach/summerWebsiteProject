@@ -1,0 +1,80 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-1 col-sm-offest-1">
+			<h2><%=@qset.name %></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 ">
+			<h2><small>Question List</small></h2>
+			<%= link_to "Edit set", request.original_url << '/edit' %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Question</th>
+						<th>Answer</th>
+						<th>Distractor Style</th>
+						<th>Distractor 1</th>
+						<th>Distractor 2</th>
+						<th>Distractor 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @questions.each do |q| %>
+						<tr>
+							<td><%= q.id %></td>
+							<td><%= q.question_text %></td>
+							<td><%= q.answer %></td>
+							<td><%= q.distractors %></td>
+							<td><%= q.dist1 %></td>
+							<td><%= q.dist2 %></td>
+							<td><%= q.dist3 %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class= "row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Number of questions</th>
+						<th>Questions Correct</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% current_user.set_results.each do |result| %>
+						<% if result.qset_id == params[:id].to_i%>
+						<tr>
+							<td><%= result.created_at.strftime("%m-%d-%y") %></td>
+							<td><%= result.number_of_questions %></td>
+							<td><%= result.questions_correct %></td>
+							<td><%= (result.score * 100).to_i.to_s + "%" %></td>
+						</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<%= link_to "Back", qset_index_path, class: "btn btn-default" %>
+	</div>
+	<div class="row">
+		<div class="col-sm-10">
+			Created at: <%= @qset.created_at %>
+		</div>
+		<div class="col-sm-10">
+			Updated at: <%= @qset.updated_at %>
+		</div>
+	</div>
+</div>

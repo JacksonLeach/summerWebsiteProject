@@ -10,6 +10,7 @@ class QuestionController < ApplicationController
 		@question = Question.new(question_params)
 		if @question.save
 			redirect_to '/questions'
+			flash[:notice] = "Question successfully created!"
 		else
 			render 'new'
 		end
@@ -24,6 +25,7 @@ class QuestionController < ApplicationController
 		@question = Question.find(params[:id])
 		if @question.update_attributes(question_params)
 			redirect_to :action => 'show', :id => @question.id
+			flash[:notice] = "Question successfully updated!"
 		else
 			render 'edit'
 		end

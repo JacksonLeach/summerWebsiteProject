@@ -1,0 +1,22 @@
+<div>
+	<%= link_to 'New Question Set', qset_new_path, class: 'btn btn-default' %>
+</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Set Name</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @qsets.each do |i| %>
+			<tr> 
+				<td><%= i.id %></td>
+				<td><%= link_to i.name, qset_path(i.id)%></td>
+				<td><%= link_to "Edit", qset_edit_path(i.id) %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>

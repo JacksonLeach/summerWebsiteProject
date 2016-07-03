@@ -1,0 +1,2 @@
+module QuestionResultHelper
+end
