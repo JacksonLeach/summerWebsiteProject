@@ -1,0 +1,2 @@
+module SetResultHelper
+end

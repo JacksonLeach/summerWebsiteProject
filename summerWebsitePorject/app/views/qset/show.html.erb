@@ -40,6 +40,32 @@
 			</table>
 		</div>
 	</div>
+	<div class= "row">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Number of questions</th>
+						<th>Questions Correct</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% current_user.set_results.each do |result| %>
+						<% if result.qset_id == params[:id].to_i%>
+						<tr>
+							<td><%= result.created_at.strftime("%m-%d-%y") %></td>
+							<td><%= result.number_of_questions %></td>
+							<td><%= result.questions_correct %></td>
+							<td><%= (result.score * 100).to_i.to_s + "%" %></td>
+						</tr>
+						<% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<div class="row">
 		<%= link_to "Back", qset_index_path, class: "btn btn-default" %>
 	</div>

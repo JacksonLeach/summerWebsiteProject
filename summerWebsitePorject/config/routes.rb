@@ -65,4 +65,13 @@ Rails.application.routes.draw do
   get '/questionsets/:id' => 'qset#show', :as => :qset
   get '/questionsets/:id/edit' => 'qset#edit', :as =>:qset_edit
   patch '/questionsets/:id' => 'qset#update'
+  get '/signup/:role' => 'user#new', :as => :user_new
+  post '/signup/:role' => 'user#create', :as => :user_create
+  get '/user/:id' => 'user#show', :as => :user_show
+  root 'question#index'
+  get '/login' => 'session#new', as: :login
+  post '/login' => 'session#create'
+  delete '/logout' => 'session#destroy', as: :logout
+  get '/taketest/:qset_id' => 'set_result#new', as: :take_test
+  post '/taketest/:qset_id' => 'set_result#calculate_results', as: :qset_results_create
 end

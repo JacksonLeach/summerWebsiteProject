@@ -7,5 +7,6 @@ class Question < ActiveRecord::Base
 	validates :dist1, presence: true, :if => lambda{ |o| o.distractors == "explicit"}
 	validates :dist2, presence: true, :if => lambda{ |o| o.distractors == "explicit"}
 	validates :dist3, presence: true, :if => lambda{ |o| o.distractors == "explicit"}
+	attr_accessor :user_answer
 
 end

@@ -8,8 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <%= stylesheet_link_tag :application, media: 'all', 'data-turbolinks-track' => true %>  
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 
+    <%= stylesheet_link_tag :application, media: 'all' %>  
+    <%= javascript_include_tag 'application' %> 
     <%= csrf_meta_tags %>
     <title>Summer Website Project</title>
 
@@ -52,6 +52,13 @@
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
+            <% if current_user %>
+              <li><%= link_to "Hi " << current_user.first_name, user_show_path(current_user)%></li>
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "Sign in", login_path %></li>
+              <li><%= link_to "Sign up", user_new_path("student") %></li>
+            <% end %>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
