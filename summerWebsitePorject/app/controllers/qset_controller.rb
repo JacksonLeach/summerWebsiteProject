@@ -22,6 +22,41 @@ class QsetController < ApplicationController
 	def show
 		@qset = Qset.find(params[:id])
 		@questions = @qset.questions
+		@results = []
+		@dataToGraph = []
+		current_user.set_results.each do |r|
+			if r.qset_id == params[:id].to_i
+				@results.push(r)
+			end
+		end
+		current_date = ""
+		date = []
+		resultsByDate = []
+		@results.each do |result| 
+			if result.created_at.to_date == current_date 
+				date.push(result)
+			else
+				if date.count > 0
+					resultsByDate.push(date)
+					date.clear
+				end
+				current_date = result.created_at.to_date
+				date.push(result)
+			end
+		end
+		resultsByDate.push(date)
+		resultsByDate.each do |date|
+			total = 0
+			thisDate = ""
+			date.each do |result|
+				total += (result.score * 100).to_i
+				thisDate = result.created_at.to_date
+			end
+			average = total / date.count
+			@dataToGraph.push([thisDate.to_time.to_i * 1000, average])
+		end
+		gon.dataToGraph = @dataToGraph
+
 	end
 	def edit
 		@qset = Qset.find(params[:id])

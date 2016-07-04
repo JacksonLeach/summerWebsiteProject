@@ -1,13 +1,14 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-1 col-sm-offest-1">
+		<div class="col-sm-2 qset-header inline-header">
 			<h2><%=@qset.name %></h2>
+			<%= link_to "Edit set", request.original_url << '/edit' %>
 		</div>
 	</div>
+	<hr class="form-breakpoint">
 	<div class="row">
-		<div class="col-sm-2 ">
+		<div class="col-sm-2 qset-header qset-subheader">
 			<h2><small>Question List</small></h2>
-			<%= link_to "Edit set", request.original_url << '/edit' %>
 		</div>
 	</div>
 	<div class="row">
@@ -40,6 +41,65 @@
 			</table>
 		</div>
 	</div>
+	<hr class="form-breakpoint">
+	<div class="row">
+		<div lass="col-xs-offset-1">
+			<h2><small>Recent Results</small></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="graph-container"></div>
+	<script type="text/javascript">
+			var graphData = [{
+				data: gon.dataToGraph,
+				color: "green"
+			}]
+			$.plot($(".graph-container"), graphData, {
+				series:{
+					points:{
+						show: true
+					},
+					lines:{
+						show: true
+					}
+				},
+				grid:{
+					hoverable: true
+				},
+				xaxis: {
+					mode: "time",
+					timeformat: "%m-%d-%Y"
+				},
+				yaxis: {
+					max: 100
+				}
+			});
+			$("<div id='tooltip'></div>").css({
+				position: "absolute",
+				display: "none",
+				border: "3px solid green",
+				padding: "2px",
+				"background-color": "#A1D8A1"
+			}).appendTo("body");
+			$(".graph-container").bind("plothover", function (event, pos, item){
+				//alert("Showing tooltip")
+				if (item){
+					var x = item.datapoint[0],
+					y = item.datapoint[1];
+					var date = new Date(x);
+					$("#tooltip").html("Average score of: " + y + "% on " + date.toLocaleDateString()).css({top: item.pageY-10, left: item.pageX+20}).fadeIn();
+				}
+				else
+				{
+					$("#tooltip").hide();
+				}
+
+			})
+	</script>
+	<hr class="form-breakpoint">
+	<div class="row">
+		<h2><small>Detailed Results</small></h2>
+	</div>
 	<div class= "row">
 		<div class="table-responsive">
 			<table class="table table-striped">
@@ -71,10 +131,10 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-10">
-			Created at: <%= @qset.created_at %>
+			Created: <%= @qset.created_at.to_date %>
 		</div>
 		<div class="col-sm-10">
-			Updated at: <%= @qset.updated_at %>
+			Updated: <%= @qset.updated_at.to_date %>
 		</div>
 	</div>
 </div>
