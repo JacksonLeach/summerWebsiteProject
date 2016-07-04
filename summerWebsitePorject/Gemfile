@@ -49,5 +49,5 @@ gem 'autoprefixer-rails'
 #gem 'rake', '~>11.1.2'
 gem 'gon'
 group :production do 
-	gem 'rails12_factor'
+	gem 'rails_12factor'
 end
