@@ -109,6 +109,7 @@
 						<th>Number of questions</th>
 						<th>Questions Correct</th>
 						<th>Score</th>
+						<th>User</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -119,6 +120,7 @@
 							<td><%= result.number_of_questions %></td>
 							<td><%= result.questions_correct %></td>
 							<td><%= (result.score * 100).to_i.to_s + "%" %></td>
+							<td><%= User.find(result.user_id).first_name %></td>
 						</tr>
 						<% end %>
 					<% end %>

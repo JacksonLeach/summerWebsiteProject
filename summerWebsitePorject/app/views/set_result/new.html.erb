@@ -6,25 +6,25 @@
 	<div class = "row">
 		<div class="col-xs-offset-1">
 			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.answer %>
-			<%= label_tag "question_data[#{question.id}]['user_answer']", question.answer %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']_" + question.answer, question.answer %>
 		</div>
 	</div>
 	<div class = "row">
 		<div class="col-xs-offset-1">
 			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist1 %>
-			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist1 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']_" + question.dist1, question.dist1 %>
 		</div>
 	</div>
 	<div class = "row">
 		<div class="col-xs-offset-1">
 			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist2 %>
-			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist2 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']_" + question.dist2, question.dist2 %>
 		</div>
 	</div>
 	<div class = "row">
 		<div class="col-xs-offset-1">
 			<%= radio_button_tag "question_data[#{question.id}]['user_answer']", question.dist3 %>
-			<%= label_tag "question_data[#{question.id}]['user_answer']", question.dist3 %>
+			<%= label_tag "question_data[#{question.id}]['user_answer']_" + question.dist3, question.dist3 %>	
 		</div>
 	</div>
 	<% end %>
