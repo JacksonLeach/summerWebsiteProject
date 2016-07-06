@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-2 qset-header inline-header">
+		<div class=" qset-header inline-header">
 			<h2><%=@qset.name %></h2>
 			<%= link_to "Edit set", request.original_url << '/edit' %>
 		</div>
@@ -43,18 +43,18 @@
 	</div>
 	<hr class="form-breakpoint">
 	<div class="row">
-		<div lass="col-xs-offset-1">
+		<div>
 			<h2><small>Recent Results</small></h2>
 		</div>
 	</div>
 	<div class="row">
-		<div class="graph-container"></div>
+		<div class="graph-container lines"></div>
 	<script type="text/javascript">
 			var graphData = [{
 				data: gon.dataToGraph,
 				color: "green"
 			}]
-			$.plot($(".graph-container"), graphData, {
+			$.plot($(".graph-container.lines"), graphData, {
 				series:{
 					points:{
 						show: true
@@ -71,7 +71,8 @@
 					timeformat: "%m-%d-%Y"
 				},
 				yaxis: {
-					max: 100
+					max: 100,
+					min: 0
 				}
 			});
 			$("<div id='tooltip'></div>").css({
@@ -82,7 +83,6 @@
 				"background-color": "#A1D8A1"
 			}).appendTo("body");
 			$(".graph-container").bind("plothover", function (event, pos, item){
-				//alert("Showing tooltip")
 				if (item){
 					var x = item.datapoint[0],
 					y = item.datapoint[1];
@@ -125,6 +125,101 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<hr class="form-breakpoint">
+	<div class="row">
+		<h2><small>Score Spread</small></h2>
+	</div>
+	<div class="row">
+		<div class="col-xs-offset-1">
+			<h4><small>(scores rounded to nearest 10%)</small></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="graph-container bar"></div>
+		<script type="text/javascript">
+		var spreadData = [{
+			data: gon.spreadData,
+			color: "green"
+		}];
+		$.plot($(".graph-container.bar"), spreadData, {
+			series: {
+				bars: {
+					show: true,
+					barWidth: 5,
+					align: 'center'
+				}
+			},
+			grid: {
+				hoverable: true
+			},
+			xaxis: {
+				max: 100,
+				min: 0
+			},
+			yaxis: {
+				tickSize: 1
+			}
+		});
+		$(".graph-container.bar").bind("plothover", function (event, pos, item){
+			if (item){
+				var x = item.datapoint[0],
+				y = item.datapoint[1];
+				var date = new Date(x);
+				var plural = (y != 1) ? "results" : "result";
+				$("#tooltip").html(y + " " + plural + " scored " + x + "% within the last month").css({top: item.pageY-10, left: item.pageX+20}).fadeIn();
+			}
+			else
+			{
+				$("#tooltip").hide();
+			}
+		})
+		</script>
+	</div>
+	<hr class="form-breakpoint">
+	<div class="row">
+		<h2><small>Average score by tag</small></h2>
+	</div>
+	<div class="row">
+		<div class="graph-container tag"></div>
+		<script type="text/javascript">
+		var tagData = [{
+			data: gon.tagData,
+			color: "green"
+		}]
+		$.plot(".graph-container.tag", tagData, {
+			series: {
+				bars:{
+					show: true,
+					barWidth: 1,
+					align: "center"
+				}
+			},
+			grid: {
+				hoverable: true
+			},
+			xaxis:{
+				ticks: gon.tickData
+			},
+			yaxis:{
+				min: 0,
+				max: 100
+			}
+		})
+		$(".graph-container.tag").bind("plothover", function (event, pos, item){
+			if (item){
+				var x = gon.tickData[item.datapoint[0]][1],
+				y = item.datapoint[1];
+				var date = new Date(x);
+				$("#tooltip").html("Questions tagged " + x + " have scored an average of " + y + "% in the past month").css({top: item.pageY-10, left: item.pageX+20}).fadeIn();
+			}
+			else
+			{
+				$("#tooltip").hide();
+			}
+		})
+
+		</script>
 	</div>
 	<div class="row">
 		<%= link_to "Back", qset_index_path, class: "btn btn-default" %>

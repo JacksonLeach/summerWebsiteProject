@@ -16,7 +16,7 @@ class SetResultController < ApplicationController
 			else
 				total += 1
 			end
-			current_user.question_results.create(question: question.question_text, correct_answer: question.answer, user_answer: a[1]["'user_answer'"], correct?: a[1]["'user_answer'"] == question.answer, tag: question.tag)
+			current_user.question_results.create(question: question.question_text, correct_answer: question.answer, user_answer: a[1]["'user_answer'"], correct?: a[1]["'user_answer'"] == question.answer, tag: question.tag, set_result_id: params[:qset_id])
 		end
 		flash[:notice] = correct
 		current_user.set_results.create(number_of_questions: total, questions_correct: correct, score: correct.to_f/total, qset_id: params[:qset_id])

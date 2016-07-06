@@ -3,5 +3,6 @@ class ForiegnKeyMigration < ActiveRecord::Migration
 		add_column :question_results, :user_id, :integer
 		add_column :set_results, :user_id, :integer
 		add_column :set_results, :qset_id, :integer
+		add_column :question_results, :set_result_id, :integer
 	end
 end
