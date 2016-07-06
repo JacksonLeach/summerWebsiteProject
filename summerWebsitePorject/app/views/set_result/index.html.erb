@@ -1,0 +1,21 @@
+<div class="row">
+	<h2>Tests availible to take</h2>
+</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Set Name</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @tests.each do |test| %>
+			<tr>
+				<td><%= test.id %></td>
+				<td><%= link_to test.name, take_test_path(test.id) %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
