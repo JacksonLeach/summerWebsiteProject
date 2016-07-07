@@ -148,7 +148,7 @@
 			series: {
 				bars: {
 					show: true,
-					barWidth: 5,
+					barWidth: 9,
 					align: 'center'
 				}
 			},
@@ -168,8 +168,8 @@
 				var x = item.datapoint[0],
 				y = item.datapoint[1];
 				var date = new Date(x);
-				var plural = (y != 1) ? "results" : "result";
-				$("#tooltip").html(y + " " + plural + " scored " + x + "% within the last month").css({top: item.pageY-10, left: item.pageX+20}).fadeIn();
+				var plural = (y != 1) ? "scores" : "score";
+				$("#tooltip").html(y + " " + plural + " of " + x + "% within the last month").css({top: item.pageY-10, left: item.pageX+20}).fadeIn();
 			}
 			else
 			{

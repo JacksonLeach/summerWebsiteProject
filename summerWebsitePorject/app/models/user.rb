@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 	has_secure_password
-	has_many :users, -> {where self.teacher?}
-	has_many :questions, -> {where self.teacher?}
-	has_many :qsets, -> {where self.teacher?}
+	has_many :users
+	has_many :questions
+	has_many :qsets
 	has_many :set_results
 	has_many :question_results
 

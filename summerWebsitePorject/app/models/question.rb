@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
 	has_and_belongs_to_many :qsets
+	belongs_to :user
 	validates :question_text, presence: true
 	validates :answer, presence: true
 	validates :tag, presence: true

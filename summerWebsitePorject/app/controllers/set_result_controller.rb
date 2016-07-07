@@ -1,4 +1,5 @@
 class SetResultController < ApplicationController
+	before_action :require_student
 	def new 
 		@set_result = SetResult.new
 		@qset = Qset.find(params[:qset_id])

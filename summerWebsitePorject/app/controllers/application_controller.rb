@@ -10,6 +10,21 @@ class ApplicationController < ActionController::Base
   	redirect_to '/login' unless current_user
   end
   def require_student
-  	redirect_to '/' unless current_user.student?
+    if !current_user.student? && !current_user.admin?
+      flash[:auth_error] = "Sorry, you do not have access to that"
+      redirect_to request.referer
+    end
+  end
+  def require_teacher
+    if !current_user.teacher? && !current_user.admin?
+      flash[:auth_error] = "Sorry, you do not have access to that"
+      redirect_to request.referer
+    end
+  end
+  def require_admin
+    if !current_user.admin? 
+      flash[:auth_error] = "Sorry, you do not have access to that"
+      redirect_to request.referer
+    end
   end
 end

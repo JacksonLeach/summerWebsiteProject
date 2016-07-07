@@ -2,6 +2,7 @@ class QsetController < ApplicationController
 	helper_method :return_question
 	helper_method :score_to_percent
 	helper_method :find_in_2d_array
+	before_action :require_teacher
 	def index
 		@qsets = Qset.all
 	end
@@ -16,7 +17,7 @@ class QsetController < ApplicationController
 	end
 	def new
 		@qset = Qset.new
-		@question_list = Question.all
+		@question_list = current_user.questions
 	end
 	def return_question(id)
 		@this_question = Question.find(id)
@@ -126,7 +127,7 @@ class QsetController < ApplicationController
 	end
 	def edit
 		@qset = Qset.find(params[:id])
-		@question_list = @qset.questions
+		@question_list = current_user.questions
 	end
 	def update
 		@qset = Qset.find(params[:id])

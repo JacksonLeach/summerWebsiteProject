@@ -1,5 +1,5 @@
 class QuestionController < ApplicationController
-
+	before_action :require_teacher
 	def index
 		@questions = Question.order(:id)
 	end
@@ -8,6 +8,7 @@ class QuestionController < ApplicationController
 	end
 	def create
 		@question = Question.new(question_params)
+		@question.user_id = current_user.id
 		if @question.save
 			redirect_to '/questions'
 			flash[:notice] = "Question successfully created!"
@@ -35,6 +36,6 @@ class QuestionController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:question_text, :answer, :distractors, :dist1, :dist2, :dist3, :tag)
+		params.require(:question).permit(:question_text, :answer, :distractors, :dist1, :dist2, :dist3, :tag, :user_id)
 	end
 end
