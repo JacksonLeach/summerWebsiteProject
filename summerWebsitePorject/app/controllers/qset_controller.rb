@@ -2,7 +2,9 @@ class QsetController < ApplicationController
 	helper_method :return_question
 	helper_method :score_to_percent
 	helper_method :find_in_2d_array
+	
 	before_action :require_teacher
+	before_action :check_verified
 	def index
 		@qsets = Qset.all
 	end
@@ -42,6 +44,7 @@ class QsetController < ApplicationController
 		date = []
 		resultsByDate = []
 		@results.each do |result| 
+			
 			if result.created_at.to_date == current_date 
 				date.push(result)
 			else
@@ -80,46 +83,69 @@ class QsetController < ApplicationController
 			end
 		end
 		gon.spreadData = barResults
-		resultsByTag = Array.new
+		resultsByTag = Hash.new
+		tag_list = Array.new
 		current_tag = ""
 		tagGroup = Array.new
 		gon.tagData = Array.new
-
+		questionList = Array.new
 		@results.each do |result|
-			MyLog.debug result
+			
 			result.question_results.each do |qr|
-				MyLog.debug qr
-				MyLog.debug current_tag
-				MyLog.debug qr.tag
-				if qr.tag == current_tag
-					tagGroup.push(qr)
-				else
-					if tagGroup.count > 0
-						MyLog.debug tagGroup
-						resultsByTag.push(tagGroup)
-						tagGroup = Array.new
-					else
-						tagGroup.push(qr)
-					end
-					current_tag = qr.tag
-				end
+				questionList.push (qr)
 			end
 		end
-		resultsByTag.push(tagGroup)
+		@results[0].question_results.each do |qr|
+			resultsByTag[qr.tag] = Array.new
+		end
+		
+		MyLog.debug tag_list
+		MyLog.debug tag_list.index "math"
+		questionList.each do |qr|	
+		#j		MyLog.debug qr
+		#		MyLog.debug current_tag
+		#		MyLog.debug qr.tag
+		#		if qr.tag == current_tag 
+		#			MyLog.debug "Same tag pushing "
+		#j			tagGroup.push(qr)
+		#		else
+		#			MyLog.debug "Different tag more logic"
+		#			if tagGroup.count > 0
+		#	
+		#				MyLog.debug "Count more than one creating new tag group"
+		#				MyLog.debug tagGroup
+		#				resultsByTag.push(tagGroup)
+		#				tagGroup = Array.new
+		#				tagGroup.push(qr)
+		#				MyLog.debug resultsByTag
+		#j			else
+#
+#
+#						MyLog.debug "First time on new tag group adding"
+#						tagGroup.push(qr)
+#j					end
+#j					current_tag = qr.tag
+#				end
+#			end
+			resultsByTag[qr.tag].push qr
+		end
 		MyLog.debug resultsByTag
 		gon.tickData = Array.new
 		index = 0
+		MyLog.debug resultsByTag
 		resultsByTag.each do |tag_group|
+			MyLog.debug tag_group
+
 			#MyLog.debug tag_group
 			total = 0
 			number = 0
-			tag_group.each do |i|
+			tag_group[1].each do |i|
 				total += i.correct? ? 1 : 0
 				number += 1
 			end
 			average = score_to_percent(total.to_f/number)
 			gon.tagData.push([index, average])
-			gon.tickData.push([index, tag_group[0].tag])
+			gon.tickData.push([index, tag_group[0]])
 			index += 1
 			
 		end

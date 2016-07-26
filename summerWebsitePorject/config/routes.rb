@@ -75,4 +75,6 @@ Rails.application.routes.draw do
   get '/taketest/:qset_id' => 'set_result#new', as: :take_test
   post '/taketest/:qset_id' => 'set_result#calculate_results', as: :qset_results_create
   get '/taketest' => 'set_result#index', as: :take_test_index
+  get '/verify' => 'user#verify'
+  get '/nonverified' => 'static#nonverified'
 end

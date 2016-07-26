@@ -1,5 +1,6 @@
 class QuestionController < ApplicationController
 	before_action :require_teacher
+	before_action :check_verified
 	def index
 		@questions = Question.order(:id)
 	end

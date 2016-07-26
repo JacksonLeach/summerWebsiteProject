@@ -1,4 +1,9 @@
-<%= form_for @user, url: user_create_path do |f| %>
+<% @user.errors.each do |attr, msg| %>
+	<div class="row">
+		<%= "#{attr} #{msg}" if @user.errors[attr].first == msg %> 
+	</div>
+<% end %>
+<%= form_for @user, url: user_create_path  do |f| %>
 	<div class="container">
 		<div class="row">
 			<%= f.label :first_name, class: "control-label" %>

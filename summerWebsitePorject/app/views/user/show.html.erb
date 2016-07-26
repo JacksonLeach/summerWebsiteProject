@@ -1,6 +1,9 @@
 <div class="user-info-display">
 	<div class="row">
 		<h1 class="mainheader"><%= @user.first_name << " " << @user.last_name %></h1>
+		<% if !@user.is_verified %>
+			<span class="nonverified">User not verified!</span>
+		<% end %>
 	</div>
 	<div class="row">
 		<h3 class="subheader"><small><%= @user.email %></small></h3>
