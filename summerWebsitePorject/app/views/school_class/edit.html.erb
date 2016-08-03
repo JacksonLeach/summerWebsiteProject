@@ -1,0 +1,92 @@
+<div class="row">
+	<h1><small>Students in this class</small></h1>
+	<%= form_for @school_class, :url => school_class_update_path(@school_class.id) do |f| %>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Remove</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @users.each do |u| %>
+				<% i += 1 %>
+					<tr>
+						<td><%= i %></td>
+						<td><%= u.first_name + " " + u.last_name %></td>
+						<td><%= u.email %></td>
+						<td><%= check_box_tag "update_data[remove_user][#{u.id.to_s}]" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<hr class="form-breakpoint">
+<div class="row">
+	<h1><small>Question sets assigned to this class</small></h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Set name</th>
+					<th>Number of questions</th>
+					<th>Tags in this set</th>
+					<th>Remove</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @qsets.each do |q| %>
+					<% i += 1 %>
+					<tr>
+						<td><%= i %></td>
+						<td><%= q.name %></td>
+						<td><%= q.questions.length %></td>
+						<td><%= get_tag_list(q).join(", ") %></td>
+						<td><%= check_box_tag "update_data[remove_qset][#{q.id}]" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<h1><small>Add question sets to this set</small></h1>
+	<div class="table-responsive">
+		<table class="table table-responsive">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Set name</th>
+					<th>Number of questions</th>
+					<th>Tags in this set</th>
+					<th>Add to class</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @new_qsets.each do |q| %>
+					<% i += 1 %>
+					<tr>
+						<td><%= i %></td>
+						<td><%= q.name %></td>
+						<td><%= q.questions.length %></td>
+						<td><%= get_tag_list(q).join(", ") %></td>
+						<td><%= check_box_tag "update_data[add_qset][#{q.id}]" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<%= f.submit "Update class", class: "btn btn-default" %>
+	<% end %>
+</div>
+

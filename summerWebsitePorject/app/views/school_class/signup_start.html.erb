@@ -1,0 +1,9 @@
+<div class="row">
+	<%= form_tag url: school_class_signup_confirm_path do |f| %>
+		<div class="field form-group">
+			<%= label_tag :singup_code, "Enter Class Signup Code", class: "col-sm-3 control-label" %>
+			<%= text_field_tag :signup_code,"", class: "col-sm-7 form-control" %>
+		</div>
+		<%= submit_tag "Signup", class: "btn btn-default" %>
+	<% end %>
+</div>

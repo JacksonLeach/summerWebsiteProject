@@ -1,0 +1,9 @@
+<div class="row">
+	<%= form_for(@school_class, :url => '/class', :html => {class: "form-inline"}) do |f| %>
+		<div class="field form-group">
+			<%= f.label :name, class: "col-sm-3 control-label" %>
+			<%= f.text_field :name, class: "col-sm-7 form-control" %>
+		</div>
+	<%= f.submit "Create class", class: "btn btn-default btn-form-submit"%> 
+	<% end %>
+</div>

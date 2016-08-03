@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+		<%= stylesheet_link_tag :application, media: 'all' %>
+		<style type="text/css">
+			body{
+				background-color: #E5E5E5;
+			}
+			.header{
+				background-color: #222;
+			}
+			.main{
+				background-color: #FFFFFF;
+				width: 80%;
+				margin: auto;
+			}
+			p, h1, a {
+				margin-left: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header"></div>
+		<div class="main" >
+			<h1>Welcome to Quizzy!</h1>
+			<p>Dear <%= @user.first_name %> <%= @user.last_name %>,</p>
+			<p>Thank you for creating an account on Quizzy.</p>
+			<hr class="form-breakpoint">
+			<p>The one final step to finish your account setup is to follow this link to confirm your account.</p>
+			<% link = 'http://localhost:3000/verify?user_email=' + url_encode(@user.email) + '&code=' + @user.verify_code %>
+			<%= link_to "Click here to verify your account", link %>
+			<p>If the previous link does not work then copy and paste this into your browser.</p>
+			<p><%= link %><p>
+			<hr class="form-breakpoint">
+			<p>Thank you again for signing up for Quizzy. I hope that you find it useful.</p>
+			<p>Sincerely,</p>
+			<p>Jackson Leach</p>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<div class="row">
+	<%= link_to "Edit", school_class_edit_path(@school_class.id), class: "btn btn-default" %>
+</div>
+<div class="row">
+	<h1><small>Students in this class</small></h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Username</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @users.each do |u| %>
+				<% i += 1 %>
+					<tr>
+						<td><%= i %></td>
+						<td><%= u.first_name + " " + u.last_name %></td>
+						<td><%= u.email %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<hr class="form-breakpoint">
+<div class="row">
+	<h1><small>Question sets assigned to this class</small></h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Set name</th>
+					<th>Number of questions</th>
+					<th>Tags in this set</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% i = 0 %>
+				<% @qsets.each do |q| %>
+					<% i += 1 %>
+					<tr>
+						<td><%= i %></td>
+						<td><%= q.name %></td>
+						<td><%= q.questions.length %></td>
+						<td><%= get_tag_list(q).join(", ") %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

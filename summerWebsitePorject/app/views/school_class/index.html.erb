@@ -1,0 +1,26 @@
+<% if current_user.teacher? %>
+	<div class="row">
+		<%= link_to 'New Class', school_class_new_path, class: 'btn btn-default' %>
+	</div>
+<% end %>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Class Name</th>
+				<th>Teacher</th>
+				<th>Signup Code</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @school_classes.each do |i| %>
+		<% teacher = User.find(i.teacher) %>
+			<tr> 
+				<td><%= link_to i.name, school_class_show_path(i.id)%></td>
+				<td><%= teacher.first_name[0] + ". " + teacher.last_name%></td>
+				<td><%= i.id %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
