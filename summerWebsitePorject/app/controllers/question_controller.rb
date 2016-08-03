@@ -2,9 +2,11 @@ class QuestionController < ApplicationController
 	before_action :require_teacher
 	before_action :check_verified
 	def index
+		params[:page_header] = "Your questions"
 		@questions = Question.order(:id)
 	end
 	def new
+		params[:page_header] = "New Question"
 		@question = Question.new
 	end
 	def create
@@ -18,9 +20,11 @@ class QuestionController < ApplicationController
 		end
 	end
 	def show
+		params[:page_header] = "Question Details"
 		@question = Question.find(params[:id])
 	end
 	def edit
+		params[:page_header] = "Edit Question"
 		@question = Question.find(params[:id])
 	end
 	def update

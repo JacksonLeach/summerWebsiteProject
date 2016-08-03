@@ -77,4 +77,12 @@ Rails.application.routes.draw do
   get '/taketest' => 'set_result#index', as: :take_test_index
   get '/verify' => 'user#verify'
   get '/nonverified' => 'static#nonverified'
+  get '/class/new' => 'school_class#new', as: :school_class_new
+  post '/class' => 'school_class#create', as: :school_class_create
+  get '/class'=> 'school_class#index', as: :school_class_index
+  get '/class/signup' => 'school_class#signup_start', as: :school_class_signup_start
+  post '/class/signup' => 'school_class#signup_confirm', as: :school_class_signup_confirm
+  get '/class/:id/add_set' => 'school_class#edit', as: :school_class_edit
+  patch '/class/:id/update' => 'school_class#update', as: :school_class_update
+  get '/class/:id' => 'school_class#show', as: :school_class_show
 end

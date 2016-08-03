@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">QuizMe</a>
+          <a class="navbar-brand" href="#">Quizzy</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -53,12 +53,11 @@
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
-            <% if current_user %>
-              <li><%= link_to "Hi " << current_user.first_name, user_show_path(current_user)%></li>
-              <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-            <% else %>
-              <li><%= link_to "Sign in", login_path %></li>
-              <li><%= link_to "Sign up", user_new_path("student") %></li>
+            <% if current_user && current_user != nil %>
+             <li><%= link_to "Hi " << current_user.first_name, user_show_path(current_user)%></li>
+             <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+            <% else %> <li><%= link_to "Sign in", login_path %></li>
+             <li><%= link_to "Sign up", user_new_path("student") %></li> 
             <% end %>
           </ul>
           <form class="navbar-form navbar-right">
@@ -78,12 +77,13 @@
             <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-          	<% if current_user && (current_user.teacher? || current_user.admin?) %>
-            	<li><%= link_to "Questions", question_index_path %></li>
-            	<li><%= link_to "Question Sets", qset_index_path %></li>
-            <% end %>
+          	<% if current_user && (current_user.teacher? || current_user.admin?) && current_user != nil %>
+             <li><%= link_to "Questions", question_index_path %></li>
+             <li><%= link_to "Question Sets", qset_index_path %></li>
+             <li><%= link_to "Classes", school_class_index_path %></li>
+            <% end %> 
             <% if current_user && (current_user.student? || current_user.admin?) %>
-            	<li><%= link_to "Take test", take_test_index_path %></a></li>
+             <li><%= link_to "Take test", take_test_index_path %></a></li> 
             <% end %>
             <li><a href="">Another nav item</a></li>
             <li><a href="">More navigation</a></li>
@@ -95,10 +95,16 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header"><%= params[:page_header] ? params[:page_header] : '' %></h1>
           <div id="flash_messages">
             <% flash.each do |key, value| %>
-              <%= content_tag(:div, value, :class => "flash #{key}") %>
+              <% if value.kind_of?(Array) %>
+                <% value.each do |x| %>
+                  <%= content_tag(:div, x, :class => "flash #{key}") %>
+                <% end %>
+              <% else %>
+                <%= content_tag(:div, value, :class => "flash #{key}") %>
+              <% end %>
             <% end %>
           </div>
 

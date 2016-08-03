@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726052813) do
+ActiveRecord::Schema.define(version: 20160731212157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "has_taken_qset", id: false, force: :cascade do |t|
+    t.integer "qset_id", null: false
+    t.integer "user_id", null: false
+  end
 
   create_table "qsets", force: :cascade do |t|
     t.string   "name"
@@ -30,6 +35,14 @@ ActiveRecord::Schema.define(version: 20160726052813) do
 
   add_index "qsets_questions", ["qset_id", "question_id"], name: "index_qsets_questions_on_qset_id_and_question_id", using: :btree
   add_index "qsets_questions", ["question_id", "qset_id"], name: "index_qsets_questions_on_question_id_and_qset_id", using: :btree
+
+  create_table "qsets_school_classes", id: false, force: :cascade do |t|
+    t.integer "school_class_id", null: false
+    t.integer "qset_id",         null: false
+  end
+
+  add_index "qsets_school_classes", ["qset_id", "school_class_id"], name: "index_qsets_school_classes_on_qset_id_and_school_class_id", using: :btree
+  add_index "qsets_school_classes", ["school_class_id", "qset_id"], name: "index_qsets_school_classes_on_school_class_id_and_qset_id", using: :btree
 
   create_table "question_result_data", force: :cascade do |t|
     t.integer "attempts", limit: 8
@@ -62,6 +75,21 @@ ActiveRecord::Schema.define(version: 20160726052813) do
     t.datetime "updated_at",    null: false
     t.integer  "user_id"
   end
+
+  create_table "school_classes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "teacher"
+  end
+
+  create_table "school_classes_users", id: false, force: :cascade do |t|
+    t.integer "school_class_id", null: false
+    t.integer "user_id",         null: false
+  end
+
+  add_index "school_classes_users", ["school_class_id", "user_id"], name: "index_school_classes_users_on_school_class_id_and_user_id", using: :btree
+  add_index "school_classes_users", ["user_id", "school_class_id"], name: "index_school_classes_users_on_user_id_and_school_class_id", using: :btree
 
   create_table "set_results", force: :cascade do |t|
     t.string   "number_of_questions"

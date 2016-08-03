@@ -42,12 +42,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
+      :address              => "smtp.mailgun.org",
       :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            => "jacksonleach5@gmail.com",
-      :password             => "Oddtuba123",
-      :authentication       => :plain,
-      :enable_starttls_auto => true
+      :domain               => "mg.quizzy-app.com",
+      :user_name            => "postmaster@mg.quizzy-app.com",
+      :password             => "Oddtuba123smtp!",
+      :authentication       => :plain
 }
 end

@@ -1,5 +1,6 @@
 class UserController < ApplicationController
 	def new
+		params[:page_header] = "Signup"
 		@user = User.new
 	end
 	def create
@@ -32,6 +33,7 @@ class UserController < ApplicationController
 	end
 	def show
 		@user = User.find(params[:id])
+		params[:page_header] = @user.first_name + " " + @user.last_name
 	end
 	private 
 	def user_params

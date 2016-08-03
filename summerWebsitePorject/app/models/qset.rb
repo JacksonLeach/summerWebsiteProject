@@ -3,6 +3,7 @@ class Qset < ActiveRecord::Base
 	validates :name, presence: true
 	has_many :set_results
 	belongs_to :user
+	has_and_belongs_to_many :school_classes
 	
 end
 class MyLog

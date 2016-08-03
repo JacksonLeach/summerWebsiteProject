@@ -6,10 +6,12 @@ class QsetController < ApplicationController
 	before_action :require_teacher
 	before_action :check_verified
 	def index
-		@qsets = Qset.all
+		params[:page_header] = "Your question sets"
+		@qsets = current_user.qsets
 	end
 	def create
-		@qset = Qset.new(qset_params)
+
+		@qset = current_user.qsets.build(qset_params)
 		if @qset.save
 			flash[:notice] = "Set successfully created!"
 			redirect_to '/questionsets'
@@ -18,6 +20,7 @@ class QsetController < ApplicationController
 		end
 	end
 	def new
+		params[:page_header] = "New Question set"
 		@qset = Qset.new
 		@question_list = current_user.questions
 	end
@@ -31,6 +34,7 @@ class QsetController < ApplicationController
 		return array.index{|i| i[0] == val}
 	end
 	def show
+		params[:page_header] = "Question set Results"
 		@qset = Qset.find(params[:id])
 		@questions = @qset.questions
 		@results = []
@@ -39,6 +43,9 @@ class QsetController < ApplicationController
 			if r.qset_id == params[:id].to_i
 				@results.push(r)
 			end
+		end
+		if @results = []
+			return 0
 		end
 		current_date = ""
 		date = []
@@ -152,6 +159,7 @@ class QsetController < ApplicationController
 		MyLog.debug gon.tagData
 	end
 	def edit
+		params[:page_header] = "Edit Question Set"
 		@qset = Qset.find(params[:id])
 		@question_list = current_user.questions
 	end
