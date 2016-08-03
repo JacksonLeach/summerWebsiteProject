@@ -83,7 +83,7 @@ Rails.application.configure do
       :port                 => 587,
       :domain               => "mg.quizzy-app.com",
       :user_name            => "postmaster@mg.quizzy-app.com",
-      :password             => "Oddtuba123smtp!",
+      :password             => "asdf1",
       :authentication       => :plain
 }
 end
