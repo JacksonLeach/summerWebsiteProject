@@ -7,13 +7,15 @@
 			<tr>
 				<th>#</th>
 				<th>Set Name</th>
+				<th>From class</th>
 			</tr>
 		</thead>
 		<tbody>
 		<% @tests.each do |test| %>
 			<tr>
-				<td><%= test.id %></td>
-				<td><%= link_to test.name, take_test_path(test.id) %></td>
+				<td><%= test[1].id %></td>
+				<td><%= link_to test[1].name, take_test_path(test[1].id) %></td>
+				<td><%= test[0] %></td>
 			</tr>
 		<% end %>
 		</tbody>

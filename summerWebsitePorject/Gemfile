@@ -51,3 +51,4 @@ gem 'gon'
 group :production do 
 	gem "rails_12factor"
 end
+gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun' 

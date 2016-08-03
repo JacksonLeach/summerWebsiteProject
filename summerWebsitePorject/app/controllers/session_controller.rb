@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
 	def new
+		params[:page_header] = "Login"
 	end
 	def create
 		@user = User.find_by_email(params[:session][:email])
