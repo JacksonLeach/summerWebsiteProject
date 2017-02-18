@@ -1,7 +1,4 @@
 <%= form_tag url: qset_results_create_path() do |f|%>
-	<%= @answerList.each do |q| %>
-		<%= q %>
-	<% end %>
 	<% @question_list.each do |question| %>
 	<div class="row">
 		<%= question.question_text %>

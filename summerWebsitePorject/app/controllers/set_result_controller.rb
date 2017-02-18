@@ -18,7 +18,6 @@ class SetResultController < ApplicationController
 	end
 	def generateAnswerList(questionList, question)
 		retVal = Array.new
-		#questionList.delete(question)
 		questionList.each do |x|
 			if x.answer != question.answer
 				retVal << x.answer
