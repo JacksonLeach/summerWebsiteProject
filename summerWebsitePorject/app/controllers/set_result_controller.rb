@@ -54,8 +54,8 @@ class SetResultController < ApplicationController
 			qr.save
 			MyLog.debug qr
 		end
-		sql = "insert into has_taken_qset (qset_id, user_id) values (" + @qset.id.to_s + ", " + current_user.id + ");"
-		result = ActiveRecord::Base.connection.execute(sql)
+		#sql = "insert into has_taken_qset (qset_id, user_id) values (" + @qset.id.to_s + ", " + current_user.id + ");"
+		#result = ActiveRecord::Base.connection.execute(sql)
 
 		
 
