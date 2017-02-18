@@ -36,7 +36,9 @@ class QuestionController < ApplicationController
 			render 'edit'
 		end
 	end
-
+	# def generateDistractors
+	# 	answer = params[:answer]
+		
 
 	private
 
