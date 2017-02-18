@@ -6,6 +6,25 @@ class SetResultController < ApplicationController
 		@set_result = SetResult.new
 		@qset = Qset.find(params[:qset_id])
 		@question_list = @qset.questions
+		@question_list.each do |q|
+			if q.distractors == "implicit"
+				@answerList = generateAnswerList(@question_list, q)
+				q.dist1 = @answerList.delete_at(rand(0...@answerList.count))
+				q.dist2 = @answerList.delete_at(rand(0...@answerList.count))
+				q.dist3 = @answerList.delete_at(rand(0...@answerList.count))
+			end
+		end
+
+	end
+	def generateAnswerList(questionList, question)
+		retVal = Array.new
+		#questionList.delete(question)
+		questionList.each do |x|
+			if x.answer != question.answer
+				retVal << x.answer
+			end
+		end
+		return retVal
 	end
 	def calculate_results
 		@qset = Qset.find(params[:qset_id])
@@ -46,9 +65,9 @@ class SetResultController < ApplicationController
 		params[:page_header] = "Tests availible"
 		@tests = []
 		current_user.school_class.each do |c|
-			temp_array = Array.new
-			temp_array << c.name
 			c.qsets.each do |q|
+				temp_array = Array.new
+				temp_array << c.name
 				temp_array << q
 				@tests << temp_array
 			end
